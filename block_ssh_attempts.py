@@ -1,10 +1,14 @@
 #!/usr/bin/python3
+ips = []
 
-# Opens the "sshdlog" file
+
+# Opens the "sshdlog" file and reads out each line
 with open('sshdlog.asc') as file:
-    # Reads all the lines
     for line in file.readlines():
-        # Checks if "Invalid" is in any of the lines
-        if "Invalid" in line:
-            # Prints those lines
-            print(line)
+        # Checks if "Invalid user" is in line and searches for the ip from the line
+        if "Invalid user" in line:
+            listLines=line.split(" ")
+            ip=listLines[-3]
+            ips.append(ip)
+            print("Volgende ip is toegevoegd aan de lijst: " + ip)
+# Next step is filtering the output and using fwblock.py to block the ip
